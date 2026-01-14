@@ -1,0 +1,101 @@
+body {
+    background: #0d0d0f;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+}
+
+.ticket {
+    display: flex;
+    width: 900px;
+    background: linear-gradient(135deg, #1a1d3c, #262b60);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.ticket-main {
+    flex: 3;
+    padding: 35px 40px;
+    border-right: 2px dashed rgba(255,255,255,0.25);
+}
+
+.event-name {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 25px;
+}
+
+.info-row {
+    display: flex;
+    gap: 65px;
+    margin-bottom: 25px;
+}
+
+.label {
+    font-size: 12px;
+    color: #9aa0c2;
+    letter-spacing: 1px;
+}
+
+.value {
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Right stub */
+.ticket-stub {
+    flex: 1.2;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding-inline: 45px;
+}
+
+.qr {
+    width: 140px;
+    height: 140px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.scan {
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #c8c8e8;
+}
+
+@media print {
+ 
+    #print-section, #print-section * {
+        visibility: visible; /* Show target and its children */
+    }
+ 
+    #print-section {
+        position: absolute;
+        padding: 0px;
+        left: 50%;
+        top: 50%;
+        margin: 0;
+        transform: translate(-50%, -50%)
+    }
+ 
+    @page {
+        size: landscape;
+    }
+}

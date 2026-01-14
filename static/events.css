@@ -1,0 +1,613 @@
+/* Menu & overlay styles copied from home.css, scoped for events page
+   Includes menu-toggle, overlay, panel, panel links and mobile behaviour
+*/
+
+/* Logo placeholder */
+.logo-placeholder {
+  position: fixed;
+  top: 14px;
+  left: 28px;
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  color: #fff;
+  z-index: 110;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.logo-placeholder:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.7);
+}
+
+.menu-toggle {
+  --gradient-angle: 0deg;
+  position: fixed;
+  top: 14px;
+  right: 28px;
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  color: #fff;
+  z-index: 110;
+  cursor: pointer;
+  padding: 6px;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  overflow: visible;
+}
+
+.menu-toggle svg { position: relative; z-index: 113; }
+
+.menu-toggle::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  background: conic-gradient(
+    from var(--gradient-angle),
+    rgba(255,215,0,0.35),
+    rgba(245,192,77,0.28) 30deg,
+    rgba(255,215,0,0.35) 60deg,
+    rgba(255,215,0,0) 180deg
+  );
+  filter: blur(6px) saturate(120%);
+  opacity: 0.45;
+  z-index: 109;
+  pointer-events: none;
+  animation: border-spin 6s linear infinite;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.menu-toggle::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 9999px;
+  box-shadow: inset 0 0 0 0.8px rgba(255,215,0,0.14);
+  z-index: 111;
+  pointer-events: none;
+  transition: box-shadow 160ms ease;
+}
+
+.menu-toggle:hover::after {
+  opacity: 0.70;
+  filter: blur(8px) saturate(130%);
+  transform: scale(1.01);
+}
+
+.menu-toggle:hover::before {
+  box-shadow: inset 0 0 0 1.2px rgba(255,215,0,0.18);
+}
+
+.menu-toggle:hover::after { filter: blur(10px) saturate(160%); opacity: 1; transform: scale(1.02); }
+
+.menu-toggle:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 22px rgba(0,0,0,0.7); }
+
+#menuToggle #closeIcon { display: none !important; }
+body.menu-open .menu-toggle { display: none !important; }
+
+.menu-overlay,
+.mobile-menu,
+.event-popup {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.menu-overlay::before,
+.mobile-menu::before,
+.event-popup::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: none;
+  transition: backdrop-filter 250ms ease, opacity 250ms ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.menu-panel,
+.mobile-menu-panel {
+  position: relative;
+  z-index: 120;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border-radius: 12px;
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+  min-width: 320px;
+  max-width: 580px;
+  width: min(90%, 480px);
+  box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+  transform-origin: center center;
+  pointer-events: auto;
+  opacity: 0;
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  transition: transform 240ms ease, opacity 220ms ease;
+}
+
+.panel-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 6px;
+  color: #ffd700;
+  cursor: pointer;
+  transition: background 160ms ease, transform 140ms ease;
+}
+.panel-close:hover { transform: translateY(-2px); background: rgba(255,255,255,0.04); }
+
+.panel-nav,
+.mobile-panel-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.panel-link,
+.mobile-link {
+  color: #d4d4d8;
+  margin-top: 10px;
+  text-decoration: none;
+  font-size: 1.125rem;
+  padding: 12px 18px;
+  width: 100%;
+  text-align: center;
+  border-radius: 10px;
+  transition: background 260ms ease, color 260ms ease;
+}
+
+.panel-link:hover,
+.mobile-link:hover,
+.panel-link:focus,
+.mobile-link:focus {
+  background: linear-gradient(90deg, rgba(255,215,0,0.95), rgba(250,205,60,0.95));
+  color: #000;
+}
+
+.menu-panel .btn-primary,
+.mobile-menu-panel .btn-primary {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+}
+
+.menu-overlay.open,
+.mobile-menu.open,
+.event-popup.open {
+  display: flex;
+  pointer-events: auto;
+}
+
+.menu-overlay.open::before,
+.mobile-menu.open::before,
+.event-popup.open::before {
+  opacity: 1;
+  backdrop-filter: blur(6px);
+  pointer-events: auto;
+}
+
+body.menu-open main,
+body.menu-open canvas,
+body.menu-open .visualization,
+body.menu-open .container {
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+  transition: filter 220ms ease;
+}
+
+@media (min-width: 1024px) {
+  .menu-panel,
+  .mobile-menu-panel {
+    transform: scale(0.88);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .menu-panel,
+  .mobile-menu-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    border-radius: 0;
+    padding: 1.5rem;
+    justify-content: flex-start;
+    gap: 18px;
+    align-items: stretch;
+    overflow-y: auto;
+    overflow-x: visible;
+    transform: translateX(100%);
+    opacity: 1;
+  }
+
+  .menu-overlay::before,
+  .mobile-menu::before {
+    opacity: 1;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: none;
+  }
+
+  .menu-overlay,
+  .mobile-menu {
+    overflow: visible;
+  }
+
+  .panel-nav {
+    margin-top: 48px;
+    align-items: stretch;
+    overflow: visible;
+  }
+
+  .panel-link {
+    font-size: 1.125rem;
+    padding: 14px 16px;
+  }
+
+  .panel-close {
+    top: 12px;
+    right: 12px;
+    padding: 10px; /* bigger hit area */
+    width: 52px;
+    height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+  }
+
+  .panel-close svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+/* simple rotation animation for the conic gradient ring */
+@keyframes border-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.intro-section {
+  margin-bottom: 70px;
+}
+
+.intro-section p {
+  max-width: 1000px;
+  margin: 0 auto;
+  font-size: clamp(16px, 5vw, 25px);
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+  line-height: 1.6;
+  position: relative;
+  letter-spacing: 1.5px;
+  z-index: 40;
+}
+
+@media (max-width: 768px) {
+  .intro-section {
+    margin-left: 35px;
+    margin-right: 35px;
+  }
+}
+
+/* Centered hero title styling for events page */
+.section .hero-events {
+  position: relative;
+  z-index: 30; /* above plasma overlay */
+  font-family: "CS Whiplash", serif;
+  font-weight: 500;
+  color: #ffd700;
+  text-align: center;
+  text-transform: lowercase;
+  letter-spacing: -0.02em;
+  margin: 24px 0 28px 0; /* increased bottom gap to separate from events flex */
+  line-height: 1;
+  font-size: clamp(60px, 15vw, 120px);
+}
+
+/* white underline below the hero 'events' word */
+.section .hero-events::after {
+  content: "";
+  display: block;
+  width: var(--underline-width, 0px); /* set from JS to match text width */
+  height: 3px;
+  background: #ffffff;
+  margin: 6px auto 0; /* closer to the word */
+  border-radius: 2px;
+  opacity: 0.95;
+  box-shadow: 0 6px 18px rgba(255,255,255,0.04);
+  transform: scaleX(0);
+  transform-origin: center left;
+  transition: transform 260ms cubic-bezier(.2,.9,.2,1), opacity 180ms ease;
+}
+
+.section .hero-events.underline-visible::after {
+  transform: scaleX(1);
+  opacity: 1;
+  transform-origin: center center;
+}
+
+/* Reduce vertical space for the hero on events page */
+.section {
+  /* Slightly increased top gap so the hero doesn't hug the top */
+  min-height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 0 8px; /* increased top padding */
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-top: 70px;
+  }
+}
+
+/* Events two-column layout */
+.events-section {
+  display: flex;
+  gap: 32px;
+  align-items: center; /* vertically center left title with the cards */
+  margin: 80px auto 80px; /* increased margins for better section separation */
+}
+.events-left {
+  flex: 0 0 36%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.events-right {
+  flex: 1 1 64%;
+}
+
+.online-title {
+  font-family: "CS Whiplash", serif;
+  font-size: clamp(28px, 6vw, 48px);
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: left;
+  margin-top: 0; /* center vertically via flex on the parent */
+}
+
+/* thin frosted glass separator used between online/offline sections */
+.events-separator {
+  width: 100%;
+  height: 2px;
+  margin: 70px 0; /* increased vertical gap between flex sections */
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  border-radius: 2px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.5) inset;
+}
+
+@media (max-width: 1024px) {
+  .events-separator { margin: 28px 0; }
+}
+
+@media (max-width: 768px) {
+  .events-separator { margin: 20px 0; }
+}
+
+/* Cards grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* enable 3D perspective so hovered cards can "zoom" toward the user */
+.cards-grid {
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 12px;
+  padding: 16px;
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  will-change: transform, box-shadow;
+  transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* Zoom effect when hovering a card */
+.card:hover {
+  transform: translateY(-8px) translateZ(12px) scale(1.035); /* gentler zoom */
+  box-shadow: 0 18px 50px rgba(0,0,0,0.60), 0 0 40px rgba(255, 255, 255, 0.25), 0 0 80px rgba(255, 255, 255, 0.12); /* enhanced white glow */
+  z-index: 6;
+}
+
+/* Slightly subtler effect on touch / small screens */
+@media (max-width: 768px) {
+  .card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 30px rgba(0,0,0,0.50), 0 0 20px rgba(255,255,255,0.15), 0 0 40px rgba(255,255,255,0.08); }
+  .cards-grid { gap: 24px; }
+  .card-title { font-size: 1.1rem; }
+  .card-meta { font-size: 1rem; }
+}
+
+.card-body { text-align: center; color: rgba(255,255,255,0.9); }
+.card-title { font-weight: 700; color: #ffd700; margin-bottom: 6px; }
+.card-meta { font-size: 0.9rem; color: rgba(255,255,255,0.72); }
+
+/* Register button: glassy UI, golden hover with fade-in/out and black text on hover */
+.register-btn {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #ffffff;
+  text-decoration: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  transition: background 260ms ease, color 200ms ease, box-shadow 220ms ease, transform 140ms ease;
+}
+
+.register-btn:hover,
+.register-btn:focus {
+  background: linear-gradient(90deg, #ffd700, #f5c04d 70%);
+  color: #000000;
+  box-shadow: 0 12px 36px rgba(245,180,40,0.18);
+  transform: translateY(-2px);
+}
+
+.register-btn:active { transform: translateY(0); }
+
+@media (max-width: 420px) {
+  .register-btn { width: 100%; display: block; padding: 12px; }
+}
+
+@media (max-width: 768px) {
+  .events-section { flex-direction: column; }
+  .events-left { order: 1; padding: 8px 0; }
+  .events-right { order: 2; width: 60vw; margin-left: 0; margin-right: 0; }
+  .cards-grid { grid-template-columns: 1fr; }
+}
+
+/* Ensure logo + hamburger show on desktop for events page */
+@media (min-width: 1024px) {
+  .logo-placeholder { display: inline-flex; }
+  .menu-toggle { display: inline-flex; }
+}
+/* Event Details Popup Styles */
+.event-details-panel {
+  max-width: 640px;
+  padding: 2.5rem 2rem;
+}
+
+.event-popup-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffd700;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.event-rules-section {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.rules-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 1rem 0;
+  letter-spacing: 0.3px;
+}
+
+.rules-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.rules-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  color: #d4d4d8;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.rules-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #ffd700;
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+.event-register-btn {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(90deg, rgba(255,215,0,0.95), rgba(250,205,60,0.95));
+  color: #000;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
+}
+
+@media (max-width: 1023px) {
+  .event-details-panel {
+    max-width: 100%;
+  }
+  
+  .event-popup-title {
+    font-size: 1.75rem;
+  }
+  
+  .rules-heading {
+    font-size: 1.125rem;
+  }
+}
