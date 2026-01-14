@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eXabyte</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,300;1,6..72,400&display=swap" rel="stylesheet" />
+
+    <!-- Orbitron font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    
+    <!-- Tektur font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400..900&family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="static/home.css" />
+  </head>
+
+  <body>
+    <!-- Placeholder logo (mobile-only) -->
+    <a href="index.html" class="logo-placeholder">LOGO</a>
+
+    <!-- Center Navbar (desktop) -->
+    <nav class="center-navbar" aria-label="Primary navigation">
+      <a href="index.html" class="nav-logo" aria-label="Home">LOGO</a>
+      <ul class="nav-links">
+        <li><a href="#" class="nav-link">x-cryptus</a></li>
+        <li><a href="events.html" class="nav-link">events</a></li>
+        <li><a href="#" class="nav-link">about-us</a></li>
+        <li><a href="#" class="nav-link">contact-us</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hamburger button (top-right) -->
+    <button id="menuToggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+      <svg id="menuIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+      <svg id="closeIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0; visibility:hidden;">
+        <path d="M18 6L6 18M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <!-- Menu overlay -->
+    <div id="mainMenu" class="menu-overlay" aria-hidden="true">
+      <div id="menuPanel" class="menu-panel" role="dialog" aria-modal="true" aria-label="Main menu">
+        <button id="panelClose" class="panel-close" aria-label="Close menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"></path>
+          </svg>
+        </button>
+
+        <nav class="panel-nav" aria-label="Primary">
+          <a href="#" class="panel-link" style="font-size: 20px;">x-cryptus</a>
+          <a href="#" class="panel-link" style="font-size: 20px;">sponsors</a>
+          <a href="#" class="panel-link" style="font-size: 20px;">about-us</a>
+          <a href="#" class="panel-link" style="font-size: 20px;">contact-us</a>
+        </nav>
+
+      </div>
+    </div>
+
+    <!-- Main Hero Content -->
+    <main class="container">
+
+    <canvas id=background style="
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: -1;"></canvas>
+
+      
+      <!-- Left Column: Copy -->
+      <div class="content-left">
+
+        <h2 class="white-text dept-badge tektur-font" style="font-size: 22px;">From the Postgraduate and Research Department of Computer Science</h2>
+
+        <h1 id="main-title" class="tektur-font">eXabyte '26</h1>
+
+        <h2 id="subtitle" class="white-text tektur-font" data-text="exploring a realm of innovation through iteration." aria-hidden="true"></h2>
+
+        <p class="location tektur-font">St. Xavier's College [Autonomous], Kolkata</p>
+
+        <h3 class="status-badge tektur-font" style="font-size: 18px; margin-top: 10px;">
+          <span class="pulse-dot">
+            <span class="pulse-dot-ping"></span>
+            <span class="pulse-dot-inner"></span>
+          </span>
+          18th & 19th March, 2026.
+        </h3>
+
+        <p class="address tektur-font">
+          30, Mother Teresa Sarani,<br />
+          Mullick Bazar, Park Street area,<br />
+          Kolkata, West Bengal - 700016.
+        </p>
+
+        <div class="cta-container">
+          <a href="events.html" class="shiny-cta orbitron-font">
+            <span>Register</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Abstract UI Visualization -->
+    </main>
+
+    <!-- GSAP -->
+     <script>
+      window.addEventListener("load", () => {
+        document.body.classList.add("page-loaded");
+      });
+    </script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
+      integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="static/home.js"></script>
+
+    <!-- Background Effects -->
+    <script type="importmap">
+        {
+            "imports" : {
+                  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script src="static/3d-sea.js" type=module></script>
+
+  </body>
+</html>

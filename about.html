@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+
+        <link rel="stylesheet" href="static/about.css">    <!-- we include this because well we are in the about.html -->
+        <link rel="stylesheet" href="static/components/navbar.css">   <!-- we include this because we include the navbar component -->
+
+    </head>
+    <body>
+        <header>{{ header }}</header>
+
+        {% include "components/navbar.html" with context %}
+
+        <main>{{ main }}</main>
+
+        <div>{{ extra_for_about }}</div>
+    </body>
+</html>

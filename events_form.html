@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Form</title>
+
+    <link rel="stylesheet" href="/static/navbar.css">
+    <link rel="stylesheet" href="/static/events_form.css">
+
+</head>
+<body>
+    <div class="loader-father noshow">
+        <div class="loader">
+        </div>
+    </div>
+    <div class="form-container">
+        <h1>Events Registration</h1>
+        <form id='event-registration'>
+            <input type="hidden" name="_template" value="table">
+
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="college">College Name</label>
+            <input type="text" id="college" name="college" required>
+
+            <div id='iff-sxc' class='hidden-block'>
+                <label for="roll">CIN Number</label>
+                <input type="text" id="roll" name="roll">
+            </div>
+  
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mobile">Mobile Number</label>
+            <input type="tel" id="mobile" name="mobile" required>
+  
+            <label for="event">Event Name</label>
+            <select id="event" name="event" required>
+                <option value="">Select an option</option>
+                <option value="A1">Thingbert 1</option>
+                <option value="B2">Thingbert 2</option>
+                <option value="C3">Thingbert 3</option>
+                <option value="D4">Thingbert 4</option>
+                <option value="Fkall">Fkall</option>
+            </select>
+                        
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+            
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+    <script src='/static/source.js'></script>
+</body>
+</html>

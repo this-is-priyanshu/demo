@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/ticket.css">
+    <title>Fancy Ticket</title>
+</head>
+<body>
+    <div class="ticket" id='print-section'>
+        <div class="ticket-main">
+            <h1 class="event-name" id="eventName">eXabyte-2026</h1>
+
+            <div class="info-row">
+                <div>
+                    <p class="label">NAME</p>
+                    <p class="value" id="name">John Doe</p>
+                </div>
+                <div>
+                    <p class="label">COLLEGE</p>
+                    <p class="value" id="college">MIT</p>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div>
+                    <p class="label">TICKET ID</p>
+                    <p class="value" id="ticket">TKS-44928</p>
+                </div>
+            </div>
+            <div class="info-row">
+                <div>
+                    <p class="label">TIMESTAMP</p>
+                    <p class="value" id="timestamp">2025-03-12 14:22</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ticket-stub">
+            <span id='inject'></span>
+            <p class="scan">SCAN TO VERIFY</p>
+        </div>
+    </div>
+
+    <script src='/static/qrcodegen-v1.8.0-es6.js'></script>
+    <script src='/static/ticket.js'></script>
+</body>
+</html>
